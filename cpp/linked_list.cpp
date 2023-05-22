@@ -62,8 +62,36 @@ namespace DSA {
             }
         };
 
-        std::shared_ptr<Node<T>> &pop_back() {}
-        std::shared_ptr<Node<T>> &pop_first() {}
+        std::shared_ptr<Node<T>> pop_back() {
+            if (isEmpty()) {
+                return nullptr;
+            }
+
+            auto curr = m_first;
+            while (curr->next() != m_last) {
+                curr = curr->next();
+            }
+
+            std::shared_ptr<Node<T>> temp = std::move(m_last);
+            curr->next() = nullptr;
+            m_last = curr;
+
+            return temp;
+
+        }
+
+        std::shared_ptr<Node<T>> pop_first() {
+            if (isEmpty()) {
+                return nullptr;
+            }
+
+            auto temp = m_first;
+            m_first = m_first->next();
+            if (m_first == nullptr) {
+                m_last = nullptr;
+            }
+            return temp;
+        }
 
         void remove(T value) {
             if (isEmpty()) {
@@ -89,6 +117,7 @@ namespace DSA {
                     } else {
                         prev->next() = curr->next();
                     }
+                    break;
                 }
 
                 prev = curr;
@@ -128,6 +157,8 @@ namespace DSA {
 
                 curr = curr->next();
             }
+
+            return nullptr;
         };
 
         void reverse() {
@@ -158,6 +189,11 @@ int main() {
     linkedList.push_back(55);
     linkedList.push_back(23);
     linkedList.push_back(11);
-    linkedList.reverse();
+    auto t = linkedList.pop_back();
+    std::cout << t->value() << std::endl;
+    linkedList.push_back(54);
+    linkedList.push_front(-43);
+    linkedList.pop_first();
+
     linkedList.display();
 };
