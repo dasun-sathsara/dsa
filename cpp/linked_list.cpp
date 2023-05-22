@@ -72,12 +72,11 @@ namespace DSA {
                 curr = curr->next();
             }
 
-            std::shared_ptr<Node<T>> temp = std::move(m_last);
+            std::shared_ptr<Node<T>> temp = m_last;
             curr->next() = nullptr;
             m_last = curr;
 
             return temp;
-
         }
 
         std::shared_ptr<Node<T>> pop_first() {

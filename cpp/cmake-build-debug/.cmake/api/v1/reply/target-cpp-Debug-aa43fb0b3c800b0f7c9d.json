@@ -101,7 +101,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "linked_list.cpp",
+			"path" : "trie.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
