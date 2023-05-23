@@ -13,7 +13,7 @@ private:
     };
 
     static bool hasChildren(const std::shared_ptr<TrieNode> &node) {
-        for (auto & i : node->children) {
+        for (auto &i: node->children) {
             if (i) {
                 return true;
             }
