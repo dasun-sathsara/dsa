@@ -1,8 +1,0 @@
-# ninja log v5
-2	334	7065460069461260	build.ninja	9fd6753022d664dc
-28	227	7064351320452531	CMakeFiles/cpp.dir/main.cpp.obj	e7a6710c21f42900
-18	984	7064351328079379	CMakeFiles/cpp.dir/string.cpp.obj	2953bc3d95c458d
-1	1141	7064351329635213	CMakeFiles/cpp.dir/dynamic_array.cpp.obj	1e846e2a839091ee
-6	862	7064367114717825	CMakeFiles/cpp.dir/linked_list.cpp.obj	f2b4b16ca86a2176
-985	1265	7064646410112448	cpp.exe	281aa3eec4d010af
-4	985	7064646407406970	CMakeFiles/cpp.dir/trie.cpp.obj	2eab08b0a8949131
