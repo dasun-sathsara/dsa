@@ -41,6 +41,7 @@ public:
 
     void printDepthFirst() {
         printDepthFirst(root);
+        std::cout << std::endl;
     }
 
     void insert(int data) {
@@ -72,8 +73,8 @@ private:
         }
 
         printDepthFirst(node->left);
-        printDepthFirst(node->right);
         std::cout << node->data << ", ";
+        printDepthFirst(node->right);
     }
 
     int balanceFactor(const std::shared_ptr<Node> &node) const {
@@ -154,7 +155,7 @@ private:
                 return node->right;
             }
 
-            std::shared_ptr<Node> nodeMin = findMin(node);
+            std::shared_ptr<Node> nodeMin = findMin(node->right);
             std::shared_ptr<Node> right = remove(node->right, nodeMin->data);
             node->right = right;
             node->data = nodeMin->data;
@@ -203,4 +204,9 @@ int main() {
     tree.insert(7);
     tree.insert(12);
     tree.printDepthFirst();
+    tree.printBreathFirst();
+
+    tree.remove(4);
+    tree.printDepthFirst();
+    tree.printBreathFirst();
 };
