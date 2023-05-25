@@ -39,19 +39,41 @@ public:
         std::cout << std::endl;
     }
 
+    void printDepthFirst() {
+        printDepthFirst(root);
+    }
+
     void insert(int data) {
         root = insert(root, data);
     }
 
-    void remove(int data) {}
+    void remove(int data) {
+        root = remove(root, data);
+    }
 
-//    bool search(int data) {}
+    bool search(int data) {
+        if (search(root, data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 private:
     std::shared_ptr<Node> root;
 
     int height(const std::shared_ptr<Node> &node) const {
         return node ? node->height : 0;
+    }
+
+    void printDepthFirst(const std::shared_ptr<Node> &node) {
+        if (!node) {
+            return;
+        }
+
+        printDepthFirst(node->left);
+        printDepthFirst(node->right);
+        std::cout << node->data << ", ";
     }
 
     int balanceFactor(const std::shared_ptr<Node> &node) const {
@@ -113,6 +135,60 @@ private:
 
         return balance(node);
     }
+
+    std::shared_ptr<Node> findMin(const std::shared_ptr<Node> &node) {
+        return node->left ? findMin(node->left) : node;
+    }
+
+    std::shared_ptr<Node> remove(const std::shared_ptr<Node> &node, int &key) {
+        if (!node) {
+            return nullptr;
+        }
+
+        if (node->data == key) {
+            if (!node->right) {
+                return node->left;
+            }
+
+            if (!node->left) {
+                return node->right;
+            }
+
+            std::shared_ptr<Node> nodeMin = findMin(node);
+            std::shared_ptr<Node> right = remove(node->right, nodeMin->data);
+            node->right = right;
+            node->data = nodeMin->data;
+
+            updateHeight(node);
+            return balance(node);
+        }
+
+        if (key > node->data) {
+            node->right = remove(node->right, key);
+            return node;
+        } else {
+            node->left = remove(node->left, key);
+            return node;
+        }
+    }
+
+    std::shared_ptr<Node> search(const std::shared_ptr<Node> &node, const int &key) {
+
+        if (!node) {
+            return nullptr;
+        }
+
+        if (node->data == key) {
+            return node;
+        }
+
+        if (key > node->data) {
+            return search(node->right, key);
+        } else {
+            return search(node->left, key);
+        }
+    }
+
 };
 
 
@@ -125,5 +201,6 @@ int main() {
     tree.insert(6);
     tree.insert(3);
     tree.insert(7);
-    tree.printBreathFirst();
+    tree.insert(12);
+    tree.printDepthFirst();
 };
